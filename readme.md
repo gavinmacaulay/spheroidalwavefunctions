@@ -1,21 +1,34 @@
-                       Prolate_swf
+# Prolate_swf
 
-  Profcn is available as both a subroutine version provided as
-  the module Prolate_swf and a stand alone version profcn. It was
-  originally developed by arnie lee van buren and jeffrey boisvert
-  over 20 years ago and has been improved a number of times since
-  then.
+## Note
 
-  Table of Contents
-  1. Purpose
-  2. Introduction
-  3. Input and Output
-  4. Accuracy of results
-  5. Obtaining the expansion d coefficients
-  6. Obtaining the eigenvalues
+This Python module wraps directly the `prolate_swf.f90` code at <https://github.com/MathieuandSpheroidalWaveFunctions/prolate_swf>, providing access to the subroutine
+version of the prolate spheroidal wave function in that file.
 
+Once installed in Python, the package can be used thus:
 
- 1. Purpose
+    from spheroidalwavefunctions import prolate_swf
+    r = prolate_swf(c=0.5, m=0, lnum=10, x1=0.5, ioprad=2, iopang=2, iopnorm=0, arg=[0.1, 0.2])
+
+Function calling details can be viewed via:
+
+    print(prolate_swf.__doc__)
+
+and further details on the function parameters are available [below](#input-and-output). A more Pythonic wrapper on top of this is provided in the Utilities module of
+[echoSMs](https://github.com/ices-tools-dev/echoSMs).
+
+The text below is the original `readme.txt` file, tweaked to work better in Markdown.
+
+---
+---
+
+Profcn is available as both a subroutine version provided as
+the module Prolate_swf and a stand alone version profcn. It was
+originally developed by Arnie Lee van Buren and Jeffrey Boisvert
+over 20 years ago and has been improved a number of times since
+then.
+
+## Purpose
 
   To calculate the first and second kind prolate radial functions r1
   and r2 and their first derivatives r1d and r2d for a given order m,
@@ -27,7 +40,7 @@
   input value of m . The stand alone version profcn calculates values for a
   range of values of m.
 
- 2. Introduction
+## Introduction
 
   Profcn is written in free format fortran. It is designed around the
   maximum number of decimal digits ndec and the maximum exponent nex
@@ -62,6 +75,7 @@
   double precision data and quadruple precision data, respectively.
 
   The methods used in profcn are documented in the journal articles:
+
   A. L. Van Buren and J. E. Boisvert, "Accurate calculation of
   prolate spheroidal radial functions of the first kind and their
   first derivatives," Quart. Appl. Math. vol 60, pp. 589-599 (2002)
@@ -71,7 +85,9 @@
   derivatives," Quart. Appl. Math. vol 62, pp. 493-507 (2004)
   [available as a pdf file on the website].
   
-  [Both articles available at github.com/mathieuandspheroidalwavefunctions]
+  Both articles available at <https://github.com/mathieuandspheroidalwavefunctions>
+  ([qam2.pdf](https://github.com/MathieuandSpheroidalWaveFunctions/prolate_swf/blob/master/qam2.pdf)
+  and [qam3.pdf](https://github.com/MathieuandSpheroidalWaveFunctions/prolate_swf/blob/master/qam3.pdf)).
   
   Expressions to calculate the radial functions of the first kind and its
   first derivatives for x = 1.0 when m = 0 are obtained from the limits of
@@ -81,7 +97,7 @@
   unequal to 0. [The corresponding radial functions of the second kind and
   their first derivatives are infinite for all m.]  
 
- 3. Input and Output
+## Input and Output
 
   Following is a description of the input and output parameters in the
   call statement for the subroutine version. After that will be a
@@ -195,7 +211,7 @@
                    narg estimated accuracy values for the angular functions
                    for each of the lnum values of l
 
-  Stand alone Version of profcn
+## Stand alone Version of profcn
 
      Input Data
 
@@ -268,197 +284,197 @@
           narg   : number of desired angle arguments. (integer)
                    (line 4 is not read when iopang = 0)
 
-     Output files
+### Output files
 
-     These output files are also available using the subroutine version
-     of profcn. Generation of each of the files is controlled by a logical
-     specified in the module param located before the program. False
-     suppresses the output file and true enables it. The logical debug
-     controls fort.30 and fort.40, the logical output controls fort.20
-     and fort.30 and warn controls fort.60.
+These output files are also available using the subroutine version
+of profcn. Generation of each of the files is controlled by a logical
+specified in the module param located before the program. False
+suppresses the output file and true enables it. The logical debug
+controls fort.30 and fort.40, the logical output controls fort.20
+and fort.30 and warn controls fort.60.
 
-      fort.20
+### fort.20
 
-     This file contains values for all radial functions that have
-     been calculated.
-     The first line in the file contains the values for x, c, and
-     m, formatted as follows (see statements 115 and 120 in subroutine
-     main):
+This file contains values for all radial functions that have
+been calculated.
+The first line in the file contains the values for x, c, and
+m, formatted as follows (see statements 115 and 120 in subroutine
+main):
 
-                x      : e23.14 in real*8; e40.30 in real*16
-                c      : e23.14 in real*8; e40.30 in real*16
-                m      : i5
+     x      : e23.14 in real\*8; e40.30 in real\*16
+     c      : e23.14 in real\*8; e40.30 in real\*16
+     m      : i5
 
-     Each subsequent line in fort.20 contains radial functions
-     for given values of l. The first line contains values for l = m,
-     the next for l=m+1 and continuing to l=m+lnum-1. The radial
-     functions are preceeded by the value of l and followed by the
-     accuracy, equal to the estimated number of accurate decimal digits
-     in the radial functions as measured either using the Wronskian
-     or estimated based on subtraction errors and degree of convergence
-     when the Wronskian is used to obtain r2 and r2d.
+Each subsequent line in fort.20 contains radial functions
+for given values of l. The first line contains values for l = m,
+the next for l=m+1 and continuing to l=m+lnum-1. The radial
+functions are preceeded by the value of l and followed by the
+accuracy, equal to the estimated number of accurate decimal digits
+in the radial functions as measured either using the Wronskian
+or estimated based on subtraction errors and degree of convergence
+when the Wronskian is used to obtain r2 and r2d.
 
-       The output and corresponding format for each line is as follows
-       (see statements 690, 700, and 710 in subroutine main). [Only 15
-       decimal digits are written to fort.20 using these formats. This
-       is equivalent to the number of decimal digits in real*8
-       arithmetic. If more digits are desired in real*16 arithmetic,
-       the format statements can be modified. The exponents are formatted
-       as I6, allowing for exponents from -99999 to +99999. This can be
-       changed to accommodate a larger exponent range by increasing the
-       format to I7 or larger.]
+The output and corresponding format for each line is as follows
+(see statements 690, 700, and 710 in subroutine main). [Only 15
+decimal digits are written to fort.20 using these formats. This
+is equivalent to the number of decimal digits in real\*8
+arithmetic. If more digits are desired in real\*16 arithmetic,
+the format statements can be modified. The exponents are formatted
+as I6, allowing for exponents from -99999 to +99999. This can be
+changed to accommodate a larger exponent range by increasing the
+format to I7 or larger.]
 
-         for ioprad = 1 or 2:
+     for ioprad = 1 or 2:
 
-               l      : value for l (i6)
-               r1c    : characteristic of the prolate radial function
-                        of first kind (f17.14)
-               ir1e   : exponent of the prolate radial function of
-                        first kind (i6)
-               r1dc   : characteristic of the first derivative of the
-                        prolate radial function of first kind (f17.14)
-               ir1de  : exponent of the first derivative of the
-                        prolate radial function of first kind (i6)
+          l      : value for l (i6)
+          r1c    : characteristic of the prolate radial function
+                    of first kind (f17.14)
+          ir1e   : exponent of the prolate radial function of
+                    first kind (i6)
+          r1dc   : characteristic of the first derivative of the
+                    prolate radial function of first kind (f17.14)
+          ir1de  : exponent of the first derivative of the
+                    prolate radial function of first kind (i6)
 
-        for ioprad = 2, each line also includes;
+     for ioprad = 2, each line also includes;
 
-               r2c    : characteristic of the prolate radial function
-                        of second kind (f17.14)
-               ir2e   : exponent of the prolate radial function of
-                        second kind (i6). If the exponent for any
-                        function is greater than 9999, the format
-                        can be increased to i6 or higher. Note that
-                        the procedures used in this program allow for
-                        exponents much larger than those allowed
-                        in real(knd) arithmetic on the users computer
-                        since the floating point function values
-                        provided are given as a characteristic and an
-                        integer exponent. Use of ratios in calculating
-                        the functions eliminates overflow during the
-                        calculations.
-               r2dc   : characteristic of the first derivative of the
-                        prolate radial function of second kind (f17.14)
-               ir2de  : exponent of the first derivative of the
-                        prolate radial function of second kind (i6).
-                        [See comment above for ir2e.]
-               naccr  : accuracy: equal to the number of decimal digits
-                        of agreement between the theoretical Wronskian
-                        and the calculated Wronskian or estimated when
-                        the Wronskian is used to obtain r2 and r2d
-                        (i2). This is a measure of the accuracy of the
-                        radial function of the second kind and its
-                        first derivative. The algorithms for calculting
-                        the radial functions of the first kind and
-                        their first derivatives are both robust with
-                        accurate results.
+          r2c    : characteristic of the prolate radial function
+                    of second kind (f17.14)
+          ir2e   : exponent of the prolate radial function of
+                    second kind (i6). If the exponent for any
+                    function is greater than 9999, the format
+                    can be increased to i6 or higher. Note that
+                    the procedures used in this program allow for
+                    exponents much larger than those allowed
+                    in real(knd) arithmetic on the users computer
+                    since the floating point function values
+                    provided are given as a characteristic and an
+                    integer exponent. Use of ratios in calculating
+                    the functions eliminates overflow during the
+                    calculations.
+          r2dc   : characteristic of the first derivative of the
+                    prolate radial function of second kind (f17.14)
+          ir2de  : exponent of the first derivative of the
+                    prolate radial function of second kind (i6).
+                    [See comment above for ir2e.]
+          naccr  : accuracy: equal to the number of decimal digits
+                    of agreement between the theoretical Wronskian
+                    and the calculated Wronskian or estimated when
+                    the Wronskian is used to obtain r2 and r2d
+                    (i2). This is a measure of the accuracy of the
+                    radial function of the second kind and its
+                    first derivative. The algorithms for calculting
+                    the radial functions of the first kind and
+                    their first derivatives are both robust with
+                    accurate results.
 
-                        To indicate that the accuracy estimate naccr
-                        has been obtained using the Wronskian, the
-                        letter w follows naccr in the output. This
-                        distinguishes it from (1) the case where the
-                        theoretical Wronskian is used to obtain the
-                        value of the denominator (series) appearing
-                        in the variable eta expressions for the radial
-                        function of the second kind and its
-                        first derivative. Here naccr is instead
-                        calculated using the degree of convergence and
-                        associated subtraction errors of the two
-                        numerators. The letter e follows naccr in the
-                        output to designate this case. This version of
-                        profcn may also use the Wronskian to compute the
-                        leading coefficients when computing r2 and r2d
-                        using the taditional Legendre function
-                        expansion. This can sometimes provides accurate
-                        values for x less than or equal to 1.01 when
-                        all of the other methods fail and the
-                        coefficients are inaccurate due to large
-                        subtraction errors incurred in their
-                        computation. This case is also indicated in the
-                        output by the use of the letter e following the
-                        accuracy value naccr.
+                    To indicate that the accuracy estimate naccr
+                    has been obtained using the Wronskian, the
+                    letter w follows naccr in the output. This
+                    distinguishes it from (1) the case where the
+                    theoretical Wronskian is used to obtain the
+                    value of the denominator (series) appearing
+                    in the variable eta expressions for the radial
+                    function of the second kind and its
+                    first derivative. Here naccr is instead
+                    calculated using the degree of convergence and
+                    associated subtraction errors of the two
+                    numerators. The letter e follows naccr in the
+                    output to designate this case. This version of
+                    profcn may also use the Wronskian to compute the
+                    leading coefficients when computing r2 and r2d
+                    using the taditional Legendre function
+                    expansion. This can sometimes provides accurate
+                    values for x less than or equal to 1.01 when
+                    all of the other methods fail and the
+                    coefficients are inaccurate due to large
+                    subtraction errors incurred in their
+                    computation. This case is also indicated in the
+                    output by the use of the letter e following the
+                    accuracy value naccr.
 
-     fort.30
+### fort.30
 
-     This file contains values for all angular functions
-     that have been calculated. Its first line contains the values
-     for c and m, formatted as follows (see statements 60 and 70 in
-     subroutine main).
+This file contains values for all angular functions
+that have been calculated. Its first line contains the values
+for c and m, formatted as follows (see statements 60 and 70 in
+subroutine main).
 
-                c      : e23.14 (knd = 8) or e40.30 (knd = 16)
-                m      : i5
+     c      : e23.14 (knd = 8) or e40.30 (knd = 16)
+     m      : i5
 
-     The second line in fort.30 contains the value for the first l (=m)
-     formatted as follows (see statement 140 in subroutine main):
+The second line in fort.30 contains the value for the first l (=m)
+formatted as follows (see statement 140 in subroutine main):
 
-                l      : i6
+     l      : i6
 
-     This is followed by a series of narg lines. Each line contains
-     a desired value of angle (ioparg = 0) or angular coordinate eta
-     (ioparg =1) followed by the corresponding angular functions and
-     accuracy. Specific output and format for each line is as follows.
-     [only 15 decimal digits are written to fort.30 using these
-     formats. If more digits are desired in real*16 arithmetic, the
-     formats can be modified.]
+This is followed by a series of narg lines. Each line contains
+a desired value of angle (ioparg = 0) or angular coordinate eta
+(ioparg =1) followed by the corresponding angular functions and
+accuracy. Specific output and format for each line is as follows.
+[only 15 decimal digits are written to fort.30 using these
+formats. If more digits are desired in real*16 arithmetic, the
+formats can be modified.]
 
-        for iopang = 1:
+     for iopang = 1:
 
-               arg    : for ioparg = 0, angle in degrees (f17.14; see
-                        statement 750 in subroutine main)
-            or barg   ; for ioparg = 1, angular coordinate eta
-                        (f17.14; see statement 750 in subroutine main)
-               s1c    : characteristic of the prolate angular function
-                        of first kind (f17.14; see statement 750)
-               is1e   : exponent of the prolate angular function of
-                        first kind (i5; see statement 750)
+          arg    : for ioparg = 0, angle in degrees (f17.14; see
+                    statement 750 in subroutine main)
+          or barg   ; for ioparg = 1, angular coordinate eta
+                    (f17.14; see statement 750 in subroutine main)
+          s1c    : characteristic of the prolate angular function
+                    of first kind (f17.14; see statement 750)
+          is1e   : exponent of the prolate angular function of
+                    first kind (i5; see statement 750)
 
-        for iopang = 2, each line also includes:
-               s1dc   : characteristic of the first derivative of the
-                        prolate angular function of first kind (f17.14;
-                        see statement 760 in subroutine main)
-               is1de  : exponent of the first derivative of the
-                        prolate angular function of first kind (i5;
-                        see statement 760 in subroutine main)
+     for iopang = 2, each line also includes:
+          s1dc   : characteristic of the first derivative of the
+                    prolate angular function of first kind (f17.14;
+                    see statement 760 in subroutine main)
+          is1de  : exponent of the first derivative of the
+                    prolate angular function of first kind (i5;
+                    see statement 760 in subroutine main)
 
-        for iopang = 1 or 2:
-               naccs  : accuracy: estimate of the number of decimal
-                        digits of accuracy in both the angular function
-                        (and its first derivative when iopang = 2). It
-                        is a conservative estimate based on the
-                        calculated subtraction error in the series
-                        calculation of the angular function. When the
-                        accuracy estimate is equal to 0, the
-                        corresponding angular functions are set equal
-                        to zero. (i2; see statements 750 and 760 in
-                        subroutine main).
+     for iopang = 1 or 2:
+          naccs  : accuracy: estimate of the number of decimal
+                    digits of accuracy in both the angular function
+                    (and its first derivative when iopang = 2). It
+                    is a conservative estimate based on the
+                    calculated subtraction error in the series
+                    calculation of the angular function. When the
+                    accuracy estimate is equal to 0, the
+                    corresponding angular functions are set equal
+                    to zero. (i2; see statements 750 and 760 in
+                    subroutine main).
 
-     fort.40 and fort.50
+### fort.40 and fort.50
 
-     These files are diagnostic files. They contain information about
-     the specific techniques used and the numbers of terms required
-     for the radial function and angular function calculations,
-     respecively. They are annotated and should be self-explanatory.
+These files are diagnostic files. They contain information about
+the specific techniques used and the numbers of terms required
+for the radial function and angular function calculations,
+respecively. They are annotated and should be self-explanatory.
 
-     fort.60
+### fort.60
 
-     This file may be of interest to the user. It is recommended that
-     the user utilize this file, especially when using profcn outside
-     the ranges where the estimated accuracy is expected to be at least
-     5 decimal digits. (see section 4 on accuracy below).
-     Whenever the estimated accuracy for the radial functions falls below
-     a designated integer value, the associated values of x, c, m, and l
-     are written to fort.60. This integer is currently set equal to 6 in
-     the write statement for fort.60 found just before the line numbered
-     600 in subroutine main. The reason for choosing 6 is that it is expected
-     that 6 accurate decimal digits are sufficient for most applications.
-     The integer can be changed to any desired value in the write(60,*),
-     If the eigenvalue routine in subroutine conver fails to converge to
-     an eigenvalue between the two neigboring eigenvalues after 50 tries
-     using progressively refined starting values, the m, l, and c values
-     where this occurs will be written to fort.60. Note that this has never
-     been observed over the many years that this routine has been used for
-     prolate eigenvalues.
+This file may be of interest to the user. It is recommended that
+the user utilize this file, especially when using profcn outside
+the ranges where the estimated accuracy is expected to be at least
+5 decimal digits. (see section 4 on accuracy below).
+Whenever the estimated accuracy for the radial functions falls below
+a designated integer value, the associated values of x, c, m, and l
+are written to fort.60. This integer is currently set equal to 6 in
+the write statement for fort.60 found just before the line numbered
+600 in subroutine main. The reason for choosing 6 is that it is expected
+that 6 accurate decimal digits are sufficient for most applications.
+The integer can be changed to any desired value in the write(60,*),
+If the eigenvalue routine in subroutine conver fails to converge to
+an eigenvalue between the two neigboring eigenvalues after 50 tries
+using progressively refined starting values, the m, l, and c values
+where this occurs will be written to fort.60. Note that this has never
+been observed over the many years that this routine has been used for
+prolate eigenvalues.
 
-  4. Accuracy of Results
+## Accuracy of Results
 
   Use of double precision arithmetic can provide accurate results up to
   values of c ranging from moderate to very large, depending on the value
@@ -479,13 +495,13 @@
 
   Profcn was tested extensively for both double and quadruple precision
   arithmetic. The compiler used provided a precision of 15 decimal digits in
-  double precision (real*8) and 31 decimal digits in quadruple precision
-  (real*16).
+  double precision (real\*8) and 31 decimal digits in quadruple precision
+  (real\*16).
 
   A set of values for x was chosen that includes those regions where
   profcn has difficulty providing highly accurate values for r2 and
-  r2d. Testing for real*8 arithmetic included all orders m up to 1000.
-  Testing using real*16 arithmetic included values of m from 0 to 500
+  r2d. Testing for real\*8 arithmetic included all orders m up to 1000.
+  Testing using real\*16 arithmetic included values of m from 0 to 500
   in steps of 10 and 550 to 1000 in steps of 50. For each value of m,
   l went from m up to a sufficiently large value where r1 and r1d have
   magnitudes smaller than about 10 to the -300 power.
@@ -530,42 +546,41 @@
   expected that this will be a problem in use of these function values
   to solve problems involving them.
   
-                        Approximate Upper limit for c
+| Approximate Upper limit for c | | |
+|---|---|---|
+| x | real*8 arithmetic | real*16 arithmetic |
+|     1.000005 |           5000| |
+|     1.00001  |           5000| |
+|     1.00005  |           3500|                  5000|
+|     1.0001   |           2500|                   5000|
+|     1.0005   |           1200|                   3100|
+|     1.001    |           1000|                   2900|
+|     1.002    |            800|                   2100|
+|     1.003    |            650|                   1700|
+|     1.004    |            600|                   1600|
+|     1.005    |            550|                   1450|
+|     1.006    |            500|                   1350|
+|     1.007    |            480|                   1300|
+|     1.008    |            450|                   1200|
+|     1.009    |            450|                   1150|
+|     1.01     |            400|                   1100|
+|     1.02     |            350|                    900(1)|
+|     1.03     |            300|                    800(1)|
+|     1.04     |            290|                    800(1)|
+|     1.05     |            290|                    900(1)|
+|     1.06     |            290|                   1000(1)|
+|     1.07     |            290|                   2000(1)|
+|     1.08     |            300|                   5000|
+|     1.09     |            300| |
+|     1.10     |           4000(2)| |
+|     1.101    |           5000| |
+|     1.102    |           4000(2)| |
+|     1.103    |           2000(2)| |
+|     1.104    |           5000| |
+|     1.105    |           5000| |
+|     1.11     |           5000| |
 
-          x         real*8 arithmetic    real*16 arithmetic
-
-     1.000005            5000
-     1.00001             5000
-     1.00005             3500                  5000
-     1.0001              2500                  5000
-     1.0005              1200                  3100
-     1.001               1000                  2900
-     1.002                800                  2100
-     1.003                650                  1700
-     1.004                600                  1600
-     1.005                550                  1450
-     1.006                500                  1350
-     1.007                480                  1300
-     1.008                450                  1200
-     1.009                450                  1150
-     1.01                 400                  1100
-     1.02                 350                   900*
-     1.03                 300                   800*
-     1.04                 290                   800*
-     1.05                 290                   900*
-     1.06                 290                  1000*
-     1.07                 290                  2000*
-     1.08                 300                  5000
-     1.09                 300
-     1.10                4000**
-     1.101               5000
-     1.102               4000**
-     1.103               2000**
-     1.104               5000
-     1.105               5000
-     1.11                5000
-
-   * For real*16 arithmetic and for x from about 1.02 to 1.07, much
+1. For real\*16 arithmetic and for x from about 1.02 to 1.07, much
      larger values of c than those give in the table above can provide
      at least 5 digits of accuracy for values of m up to a maximum
      value less than 1000 but possibly large enough for many
@@ -575,34 +590,31 @@
      is a series of values of c, each followed in parenthesis by the
      maximum value of m for that value of c.
 
-     x = 1.02: 1000(90); 1500(130); 2000(170); 3000(230); 4000(290);
-               5000(350)
-     x = 1.03: 1000(120); 1500(180); 2000(240); 3000(330); 4000(420);
-               5000(490)
-     x = 1.04: 1000(180); 1500(250); 2000(310); 3000(440); 4000(550);
-               5000(650)
-     x = 1.05: 1000(190); 1500(310); 2000(420); 3000(550); 4000(700);
-               5000(850)
-     x = 1.06: 1100(300); 1500(390); 2000(500); 3000(750); 4000(900);
-               5000(1000)
-     x = 1.07: 3000(950); 4000(1000); 5000(1000)
+     |x|c(m) values|
+     |---|---|
+     |1.02| 1000(90); 1500(130); 2000(170); 3000(230); 4000(290); 5000(350)|
+     |1.03| 1000(120); 1500(180); 2000(240); 3000(330); 4000(420); 5000(490)|
+     |1.04| 1000(180); 1500(250); 2000(310); 3000(440); 4000(550); 5000(650)|
+     |1.05| 1000(190); 1500(310); 2000(420); 3000(550); 4000(700); 5000(850)|
+     |1.06| 1100(300); 1500(390); 2000(500); 3000(750); 4000(900); 5000(1000)|
+     |1.07| 3000(950); 4000(1000); 5000(1000)|
 
-  ** There is a single 4 digit result that is not near a root for c
+2. There is a single 4 digit result that is not near a root for c
      = 5000 when x = 1.10 and when x = 1.102 and for c = 3000 and 5000
      when x = 1.103.
 
   Additional testing showed that profcn should provide highly accurate
   results for values of m above 1000 and for l well above those used
   for the table. Profcn should also provide accurate results for c up
-  to at least 5000 when x is greater than 1.11 for real*8 arithmetic
-  and when x is greater than or equal to 1.08 for real*16 arithmetic.
+  to at least 5000 when x is greater than 1.11 for real\*8 arithmetic
+  and when x is greater than or equal to 1.08 for real\*16 arithmetic.
   It should provide accurate results for c up to at least 5000 for
   x from 1.00005 down to values at least as small as 1.000000000001
-  when using either real*8 or real*16 arithmetic.
+  when using either real\*8 or real\*16 arithmetic.
 
   Use of the Wronskian to estimate accuracy can sometimes overestimate
   the accuracy of either r2 or r2d. This happens when one of the two
-  terms in the Wronskian, either r1*r2d or r2*r1d, is smaller in
+  terms in the Wronskian, either r1\*r2d or r2\*r1d, is smaller in
   magnitude that the other term. Here its effect on the Wronskian
   is reduced according to the degree to which it is smaller. Thus the
   accuracy of either r2 or r2d, whichever is in the smaller term, can
@@ -610,18 +622,18 @@
   smaller term is that one of the radial functions is near a root, then
   its contribution to a calculation using these functions will be
   reduced accordingly. It is also possible to underestimate the
-  accuracy if the two terms r1*r2d and r2*r1d are nearly equal. Profcn
+  accuracy if the two terms r1\*r2d and r2\*r1d are nearly equal. Profcn
   checks for this rare occurrence and adjusts the Wronskian accuracy
   estimate when it occurs.
 
   An integer called minacc is used in profcn to designate the
   minimum number of accurate digits desired for r2 and r2d. The value
   for minacc controls which methods are used to calculate r2 and r2d
-  and in which order. Minacc is set equal to 10 for real*8 arithmetic.
+  and in which order. Minacc is set equal to 10 for real\*8 arithmetic.
   It is recommended that this not be changed. Minacc is set equal to
-  15 for real*16 arithmetic. If more accuracy is desired, minacc can
+  15 for real\*16 arithmetic. If more accuracy is desired, minacc can
   be increased. If greater speed is desired in difficult regions where
-  real*8 arithmetic is insufficient, minacc can be reduced to a value
+  real\*8 arithmetic is insufficient, minacc can be reduced to a value
   as low as 8 digits. The value of minacc is set in a statement early
   in the program.
 
@@ -639,7 +651,7 @@
   functions almost always has insignificant impact on calculated
   solutions.
 
-  5. Obtaining the d expansion coefficients
+## Obtaining the d expansion coefficients
 
   The user may desire values for the d coefficients that appear in
   the expression for the angular functions as well as in many of the
@@ -681,7 +693,7 @@
   as c increases. The value for dmlmf will have reduced accuracy in
   this case.
 
-  6. Obtaining the eigenvalues
+## Obtaining the eigenvalues
 
   The eigenvalues for the prolate functions are computed in subroutine
   conver and returned to main where they are stored in the vector eig(l+1).
