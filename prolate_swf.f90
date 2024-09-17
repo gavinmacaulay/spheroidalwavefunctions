@@ -1,3 +1,10 @@
+module param
+    integer, parameter :: knd = selected_real_kind(8)
+    logical, parameter :: debug = .false.
+    logical, parameter :: warn = .false.
+    logical, parameter :: output = .false.
+end module param
+
 module prolate_swf
  use param
 
