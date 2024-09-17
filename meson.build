@@ -8,6 +8,13 @@ project('spheroidalwavefunctions',
                           ])
 fc = meson.get_compiler('fortran')
 
+# The intel compilers for windows give stack overflows otherwise
+if fc.get_id() == 'intel-llvm-cl' or fc.get_id() == 'intel-cl'
+  extra_f_args = ['/heap-arrays']
+else
+  extra_f_args = []
+endif
+
 py = import('python').find_installation(pure: false)
 py_dep = py.dependency()
 
@@ -37,5 +44,5 @@ py.extension_module('spheroidalwavefunctions',
                      '''spheroidalwavefunctions-f2pywrappers2.f90''', fortranobject_c],
                      include_directories: [inc_np,],
                      dependencies : [py_dep, quadmath_dep,],
-                     fortran_args: ['/heap-arrays'],
+                     fortran_args : extra_f_args,
                      install : true)
