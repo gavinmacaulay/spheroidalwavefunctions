@@ -1,7 +1,7 @@
 
 [build-system]
 build-backend = 'mesonpy'
-requires = ['meson-python', 'numpy']
+requires = ['meson-python', 'numpy', 'repairwheel']
 
 [tool.cibuildwheel]
 before-all = "uname -a"

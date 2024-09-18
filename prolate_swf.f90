@@ -1563,9 +1563,11 @@ end if
          .and. ndec - jsub > naccr .and. ndec - jsub > naccrp .and. &
          x1 >= 0.00065e0_knd) iopneu = 1
        naccrp = naccr
+       if (warn) then
         if(ioprad == 2 .and. naccr < 6) then
         write(60,*) ' est. acc. = ',naccr, ' digits for x = ', &
              x,' c = ', c,' m = ',m,' l = ',l
+        end if
         end if
 720      if(iopang == 0) go to 850
 !
