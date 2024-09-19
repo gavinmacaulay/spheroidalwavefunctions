@@ -3,18 +3,12 @@
 build-backend = 'mesonpy'
 requires = ['meson-python', 'numpy', 'repairwheel']
 
-[tool.cibuildwheel]
-before-all = "uname -a"
-build = ["cp312-*"] # ["cp312-win_amd64"]  # "cp312-manylinux_x86_64",
-
 [project]
 name = 'spheroidalwavefunctions'
 version = '0.0.1'
 license = {file = "license.txt"}
 keywords = ["prolate spheroidal wave function", "backscatter", "model"]
-authors = [
-  { name="Gavin Macaulay"}
-]
+authors = [{ name="Gavin Macaulay"}]
 description = 'Spheroidal wave functions'
 readme = "readme.md"
 requires-python = ">=3.10"
@@ -33,3 +27,7 @@ classifiers = [
     'Topic :: Scientific/Engineering',
 ]
 
+[project.urls]
+Homepage = 'https://github.com/gavinmacaulay/spheroidalwavefunctions'
+Documentation = 'https://github.com/gavinmacaulay/spheroidalwavefunctions/blob/master/readme.md'
+Repository = 'https://github.com/gavinmacaulay/spheroidalwavefunctions'
