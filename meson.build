@@ -8,7 +8,7 @@ project('spheroidalwavefunctions',
                           ])
 fc = meson.get_compiler('fortran')
 
-# The intel compilers for windows give stack overflows otherwise
+# The intel compilers for windows give stack overflows, so allocate on the heap
 if fc.get_id() == 'intel-llvm-cl' or fc.get_id() == 'intel-cl'
   extra_f_args = ['/heap-arrays']
 else
