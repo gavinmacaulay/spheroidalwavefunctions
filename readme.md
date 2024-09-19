@@ -1,9 +1,11 @@
-# Prolate_swf
+# Prolate spheroidal wave functions
 
-## Note
+![Static badge](https://img.shields.io/pypi/v/spheroidalwavefunctions.svg)
+![Static badge](https://img.shields.io/github/license/gavinmacaulay/spheroidalwavefunctions)
+[![python](https://img.shields.io/pypi/pyversions/spheroidalwavefunctions.svg?logo=python&logoColor=white)](https://pypi.org/project/https://github.com/gavinmacaulay/spheroidalwavefunctions/)
 
-This Python module wraps directly the `prolate_swf.f90` code at <https://github.com/MathieuandSpheroidalWaveFunctions/prolate_swf>, providing access to the subroutine
-version of the prolate spheroidal wave function in that file.
+A Python module wraps directly the `prolate_swf.f90` code at <https://github.com/MathieuandSpheroidalWaveFunctions/prolate_swf>, providing access to the subroutine
+version of the prolate spheroidal wave code in that file.
 
 Once installed in Python, the package can be used thus:
 
