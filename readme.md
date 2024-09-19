@@ -14,9 +14,9 @@ Function calling details can be viewed via:
 
     print(prolate_swf.profcn.__doc__)
 
-and further details on the function parameters are available [below](#input-and-output). A wrapper that provides a similar interface to
+and further details on the function parameters are available in the [documentation](https://github.com/gavinmacaulay/spheroidalwavefunctions/blob/master/readme_original.md). A wrapper that provides a similar interface to
 the spheroidal functions in scipy is available in the Utilities module of
 [echoSMs](https://github.com/ices-tools-dev/echoSMs).
 
-The original readme file, modified to work better in Markdown, is available [here](readme_original.md).
+The original readme file, modified to work better in Markdown, is available [here](https://github.com/gavinmacaulay/spheroidalwavefunctions/blob/master/readme_original.md).
 
