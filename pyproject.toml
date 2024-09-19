@@ -5,7 +5,7 @@ requires = ['meson-python', 'numpy', 'repairwheel']
 
 [project]
 name = 'spheroidalwavefunctions'
-version = '0.0.1'
+version = '0.1.0'
 license = {file = "license.txt"}
 keywords = ["prolate spheroidal wave function", "backscatter", "model"]
 authors = [{ name="Gavin Macaulay"}]
