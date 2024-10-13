@@ -8,11 +8,14 @@ project('spheroidalwavefunctions',
                           ])
 fc = meson.get_compiler('fortran')
 
-# The intel compilers for windows give stack overflows, so allocate on the heap
 if fc.get_id() == 'intel-llvm-cl' or fc.get_id() == 'intel-cl'
+  # The intel compilers for windows give stack overflows, so allocate on the heap
   extra_f_args = ['/heap-arrays']
+  # Non gfortran compilers need these
+  extra_c_args = ['-DNO_APPEND_FORTRAN', '-DUPPERCASE_FORTRAN']
 else
   extra_f_args = []
+  extra_c_args = []
 endif
 
 py = import('python').find_installation(pure: false)
@@ -43,6 +46,7 @@ py.extension_module('spheroidalwavefunctions',
                      ['''prolate_swf.f90''', '''spheroidalwavefunctionsmodule.c''',
                      '''spheroidalwavefunctions-f2pywrappers2.f90''', fortranobject_c],
                      include_directories: [inc_np,],
+                     c_args: extra_c_args,
                      dependencies : [py_dep, quadmath_dep,],
                      fortran_args : extra_f_args,
                      install : true)
