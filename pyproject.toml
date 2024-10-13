@@ -4,7 +4,11 @@ build-backend = 'mesonpy'
 requires = ['meson-python', 'numpy', 'repairwheel']
 
 [tool.cibuildwheel]
-before-all = "uname -a"
+skip = "cp36-* cp37-* cp38-* cp39-* *_i686 *ppc* *win32 *s390x *aarch64 *armv71 pp*"
+build = "*-win_amd64 *-manylinux* *-musllinux* *macosx*"
+
+[tool.cibuildwheel.windows]
+repair-wheel-command = 'repairwheel -o {dest_dir} -l "C:\Program Files (x86)\Intel\oneAPI\compiler\latest\bin" {wheel}'
 
 [project]
 name = 'spheroidalwavefunctions'
