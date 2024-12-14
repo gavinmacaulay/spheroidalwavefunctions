@@ -8,13 +8,16 @@ then.
 
 ## Purpose
 
-  To calculate the first and second kind prolate radial functions r1
+- To calculate the first and second kind prolate radial functions r1
   and r2 and their first derivatives r1d and r2d for a given order m,
   a range of degrees l beginning at m and for a specific size parameter c
-  and shape parameter x. To calculate the first kind prolate angular
+  and shape parameter x. 
+- To calculate the first kind prolate angular
   functions and their first derivatives with respect to eta for the same
   values of m, l and c and for a set of values of the angular coordinate
-  eta. The subroutine version prolate_swf calculates values for a single
+  eta.
+  
+  The subroutine version prolate_swf calculates values for a single
   input value of m . The stand alone version profcn calculates values for a
   range of values of m.
 
