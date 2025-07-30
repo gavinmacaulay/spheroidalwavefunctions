@@ -13,10 +13,10 @@ jobs:
         include: 
             - os: ubuntu-latest
               toolchain: {compiler: gcc, version: 13}
-            #- os: windows-latest
-            #  toolchain: {compiler: intel, version: '2025.0'}
-            #- os: macos-14
-            #  toolchain: {compiler: gcc, version: 13}
+            - os: windows-latest
+              toolchain: {compiler: intel, version: '2025.0'}
+            - os: macos-14
+              toolchain: {compiler: gcc, version: 13}
 
     steps:
       - uses: actions/checkout@v4
@@ -29,9 +29,6 @@ jobs:
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v3.1.1
-        # env:
-        #   CIBW_SOME_OPTION: value
-        #   ...
         with:
           package-dir: .
           output-dir: wheelhouse
