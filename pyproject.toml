@@ -1,17 +1,17 @@
 
 [build-system]
 build-backend = 'mesonpy'
-requires = ['meson-python', 'numpy', 'repairwheel']
+requires = ['meson-python', 'numpy']
 
 [tool.cibuildwheel]
 skip = ["cp314*", "cp38-*", "cp39-*", "*_i686", "*win32", "*aarch64", "*ppc*", "*s390x", "*android*", "*ios*", "*pyodide*"]
 build = ["*-win_amd64", "*-manylinux*", "*-musllinux*", "*macosx*"]
-before-all = 'pip install repairwheel'
 test-requires = "pytest"
 test-command = "pytest {package}/tests"
 
 [tool.cibuildwheel.windows]
-repair-wheel-command = 'repairwheel -o {dest_dir} -l "C:\Program Files (x86)\Intel\oneAPI\compiler\latest\bin" {wheel}'
+before-build = "pip install delvewheel"
+repair-wheel-command = 'delvewheel repair -w {dest_dir} {wheel}'
 
 [project]
 name = 'spheroidalwavefunctions'
