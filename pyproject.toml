@@ -15,7 +15,7 @@ repair-wheel-command = 'delvewheel repair -w {dest_dir} {wheel}'
 
 [project]
 name = 'spheroidalwavefunctions'
-version = '0.1.2'
+version = '0.1.3'
 license = {file = "license.txt"}
 keywords = ["prolate spheroidal wave function", "backscatter", "model"]
 authors = [{ name="Gavin Macaulay"}]
