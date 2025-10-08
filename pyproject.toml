@@ -1,24 +1,28 @@
 
 [build-system]
 build-backend = 'mesonpy'
-requires = ['meson-python', 'numpy', 'repairwheel']
+requires = ['meson-python', 'numpy']
 
 [tool.cibuildwheel]
-skip = "cp36-* cp37-* cp38-* cp39-* *_i686 *ppc* *win32 *s390x *aarch64 *armv71 pp*"
-build = "*-win_amd64 *-manylinux* *-musllinux* *macosx*"
+skip = ["cp314*", "cp38-*", "cp39-*", "*_i686", "*win32", "*aarch64", "*ppc*", "*s390x", "*android*", "*ios*", "*pyodide*"]
+build = ["*-win_amd64", "*-manylinux*", "*-musllinux*", "*macosx*"]
+test-requires = "pytest"
+test-command = "pytest {package}/tests"
 
 [tool.cibuildwheel.windows]
-repair-wheel-command = 'repairwheel -o {dest_dir} -l "C:\Program Files (x86)\Intel\oneAPI\compiler\latest\bin" {wheel}'
+before-build = "pip install delvewheel"
+repair-wheel-command = 'delvewheel repair -w {dest_dir} {wheel}'
 
 [project]
 name = 'spheroidalwavefunctions'
 version = '0.1.5'
+version = '0.1.4'
 license = {file = "license.txt"}
 keywords = ["prolate spheroidal wave function", "backscatter", "model"]
 authors = [{ name="Gavin Macaulay"}]
 description = 'Spheroidal wave functions'
 readme = "readme.md"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 dependencies = [
 	"numpy",
 ]
@@ -28,6 +32,7 @@ classifiers = [
     'License :: OSI Approved :: MIT License',
     'Operating System :: OS Independent',
     'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: 3.12',
