@@ -2,3 +2,4 @@
 fort.*
 /dist
 /wheelhouse
+*.pyc
