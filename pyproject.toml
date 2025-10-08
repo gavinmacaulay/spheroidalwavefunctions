@@ -4,7 +4,7 @@ build-backend = 'mesonpy'
 requires = ['meson-python', 'numpy']
 
 [tool.cibuildwheel]
-skip = ["cp314*", "cp38-*", "cp39-*", "*_i686", "*win32", "*aarch64", "*ppc*", "*s390x", "*android*", "*ios*", "*pyodide*"]
+skip = ["cp38-*", "*_i686", "*win32", "*aarch64", "*ppc*", "*s390x", "*android*", "*ios*", "*pyodide*"]
 build = ["*-win_amd64", "*-manylinux*", "*-musllinux*", "*macosx*"]
 test-requires = "pytest"
 test-command = "pytest {package}/tests"
@@ -16,7 +16,6 @@ repair-wheel-command = 'delvewheel repair -w {dest_dir} {wheel}'
 [project]
 name = 'spheroidalwavefunctions'
 version = '0.1.5'
-version = '0.1.4'
 license = {file = "license.txt"}
 keywords = ["prolate spheroidal wave function", "backscatter", "model"]
 authors = [{ name="Gavin Macaulay"}]
