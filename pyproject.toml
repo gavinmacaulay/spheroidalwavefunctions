@@ -44,3 +44,10 @@ classifiers = [
 Homepage = 'https://github.com/gavinmacaulay/spheroidalwavefunctions'
 Documentation = 'https://github.com/gavinmacaulay/spheroidalwavefunctions/blob/master/readme.md'
 Repository = 'https://github.com/gavinmacaulay/spheroidalwavefunctions'
+
+[dependency-groups]
+dev = [
+    "delvewheel",
+    "meson-python",
+    "pytest",
+]
