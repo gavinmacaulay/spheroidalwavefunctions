@@ -28,7 +28,7 @@ jobs:
             version: ${{ matrix.toolchain.version }}
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v4
+        uses: pypa/cibuildwheel@v4.1.0
         with:
           package-dir: .
           output-dir: dist
