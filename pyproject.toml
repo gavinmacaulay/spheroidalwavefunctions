@@ -4,7 +4,7 @@ build-backend = 'mesonpy'
 requires = ['meson-python', 'numpy']
 
 [tool.cibuildwheel]
-skip = ["cp39-*", "cp314-cp314t-*", "*_i686", "*win32", "*aarch64", "*ppc*", "*s390x", "*android*", "*ios*", "*pyodide*"]
+skip = ["cp39-*", "cp314t-*", "*_i686", "*win32", "*aarch64", "*ppc*", "*s390x", "*android*", "*ios*", "*pyodide*"]
 build = ["*-win_amd64", "*-manylinux*", "*-musllinux*", "*macosx*"]
 test-requires = "pytest"
 test-command = "pytest {package}/tests"
