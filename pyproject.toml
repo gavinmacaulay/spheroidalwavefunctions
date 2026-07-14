@@ -11,8 +11,6 @@ test-command = "pytest {package}/tests"
 
 [tool.cibuildwheel.windows]
 config-settings = { "setup-args" = "--vsenv"}  # force use of MSVC instead of MinGW on Windows
-before-build = "pip install delvewheel"
-repair-wheel-command = 'delvewheel repair -w {dest_dir} {wheel}'
 
 [project]
 name = 'spheroidalwavefunctions'
