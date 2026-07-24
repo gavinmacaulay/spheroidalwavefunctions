@@ -20,14 +20,14 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: fortran-lang/setup-fortran@v1
+      - uses: fortran-lang/setup-fortran@195bac823dc6e05bb7c706311ad4540ffc34d5b9 # v1.9.2
         id: setup-fortran
         with:
             compiler: ${{ matrix.toolchain.compiler }}
             version: ${{ matrix.toolchain.version }}
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v4.1.0
+        uses: pypa/cibuildwheel@294735312765b09d24a2fbec22660ce817587d55 # v4.1.0
         with:
           package-dir: .
           output-dir: dist
