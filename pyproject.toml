@@ -4,7 +4,19 @@ build-backend = 'mesonpy'
 requires = ['meson-python', 'numpy']
 
 [tool.cibuildwheel]
-skip = ["cp39-*", "cp314t-*", "*_i686", "*win32", "*aarch64", "*ppc*", "*s390x", "*android*", "*ios*", "*pyodide*"]
+skip = [
+    "cp39-*",
+    "cp314t-*",
+    "*_i686",
+    "*win32",
+    "*aarch64",
+    "*ppc*",
+    "*s390x",
+    "*android*",
+    "*ios*",
+    "*pyodide*",
+    ]
+
 build = ["*-win_amd64", "*-manylinux*", "*-musllinux*", "*macosx*"]
 test-requires = "pytest"
 test-command = "pytest {package}/tests"
@@ -15,7 +27,8 @@ config-settings = { "setup-args" = "--vsenv"}  # force use of MSVC instead of Mi
 [project]
 name = 'spheroidalwavefunctions'
 version = '0.1.5'
-license = {file = "license.txt"}
+license = "MIT"
+license-files = ["license.txt"]
 keywords = ["prolate spheroidal wave function", "backscatter", "model"]
 authors = [{ name="Gavin Macaulay"}]
 description = 'Spheroidal wave functions'
@@ -27,7 +40,6 @@ dependencies = [
 classifiers = [
     'Development Status :: 3 - Alpha',
     'Intended Audience :: Science/Research',
-    'License :: OSI Approved :: MIT License',
     'Operating System :: OS Independent',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.10',
