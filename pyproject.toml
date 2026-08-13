@@ -5,10 +5,10 @@ requires = ['meson-python', 'numpy']
 
 [tool.cibuildwheel]
 skip = [
+    "*t-*",
     "cp39-*",
     "cp310-*",
     "cp311-*",
-    "cp314t-*",
     "*_i686",
     "*win32",
     "*aarch64",
