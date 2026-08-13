@@ -22,3 +22,30 @@ the spheroidal functions in scipy is available in the Utilities module of
 
 The original readme file, modified to work better in Markdown, is available [here](https://github.com/gavinmacaulay/spheroidalwavefunctions/blob/master/readme_original.md).
 
+## Building
+
+Building the Python package is most easily done on Linux with C, C++ and Fortran compilers installed.
+
+It is easiest to leave the building of macOS and Windows packages to the `cibuildwheel` Github action that runs on tagged commits.
+
+The Fortran code can be compiled (after installing `uv`) with:
+
+```bash
+uv tool install --with numpy meson
+uvx meson setup tt
+uvx meson compile -C tt
+```
+
+(or install `meson` directly and don't use the uv/uvx commands).
+
+This will generate a .dll or .so file in the `tt` directory.
+
+More usefully, a Python package can be created with:
+
+```bash
+uv build
+uvx repairwheel -o whl dist/*.whl
+```
+
+This will create Python .whl files in the `whl` directory.
+  
