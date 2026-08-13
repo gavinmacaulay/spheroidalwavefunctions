@@ -1,6 +1,7 @@
 
 fort.*
 /dist
+/whl
 /wheelhouse
 *.pyc
 /__pycache__
